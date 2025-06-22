@@ -1,0 +1,37 @@
+services:
+  taskdb:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: TaskDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  taskapi:
+    build:
+      context: ./TaskManagerApi
+      dockerfile: Dockerfile
+    depends_on:
+      - taskdb
+    environment:
+      ConnectionStrings__DefaultConnection: Host=taskdb;Port=5432;Database=TaskDb;Username=postgres;Password=postgres
+      ASPNETCORE_ENVIRONMENT: Development
+      JWT__Key: super_secret_key_123
+    ports:
+      - "5000:80"
+    command: ["dotnet", "TaskManagerApi.dll"]
+
+  frontend:
+    build:
+      context: ./task-manager-frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - taskapi
+    ports:
+      - "3000:80"
+
+volumes:
+  pgdata:
