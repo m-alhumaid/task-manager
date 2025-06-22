@@ -27,6 +27,6 @@ Full-stack Task Manager app built with React (frontend), ASP.NET Core Web API (b
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/m-alhumaid/task-manager-app.git
-cd task-manager-app
+git clone https://github.com/m-alhumaid/task-manager.git
+cd task-manager
 ```

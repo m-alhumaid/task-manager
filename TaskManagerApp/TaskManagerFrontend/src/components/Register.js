@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
-import { AuthContext } from "../App"; // assuming your context is here
+import { AuthContext } from "../App";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -12,7 +12,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { setAuth } = useContext(AuthContext); // to update auth state globally
+  const { setAuth } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -33,7 +33,6 @@ const Register = () => {
         password: form.password,
       });
 
-      // response.data assumed to be JWT token
       localStorage.setItem("token", response.data);
       setAuth({ token: response.data, isAuthenticated: true });
 

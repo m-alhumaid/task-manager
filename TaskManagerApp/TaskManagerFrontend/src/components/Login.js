@@ -18,7 +18,7 @@ const Login = () => {
     setError(null);
     try {
       const res = await api.post("/auth/login", form);
-      localStorage.setItem("token", res.data); // ✅ Store token string directly
+      localStorage.setItem("token", res.data);
       setAuth({ token: res.data, isAuthenticated: true });
       navigate("/dashboard");
     } catch {
